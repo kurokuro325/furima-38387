@@ -4,55 +4,47 @@
 
 | Column             | Type   | Options                        |
 | ------------------ | ------ | -------------------------------|
-| nickname           | string | null: false, foreign_key: true |
+| nickname           | string | null: false                    |
 | email              | string | null: false, unique: true,     |
 | encrypted_password | string | null: false                    |
-| introduction       | string | null: false                    |
 | family_name        | string | null: false                    |
 | first_name         | string | null: false                    |
 | family_name_kana   | string | null: false                    |
 | first_name_kana    | string | null: false                    |
-| birthday           | string | null: false                    |
+| birthday           | date   | null: false                    |
 
 - has_many :items 
-- has_many :records
-- has_many  :cards
+- has_many :orders
 
 ## items テーブル
 
-| Column               | Type       | Options                        |
-| ------------------   | ---------- | ------------------------------ |
-| item_name            | string     | null: false                    |
-| user_id              | references | null: false, foreign_key: true |
-| price                | string     | null: false                    |
-| category             | string     | null: false                    |
-| commodity_condition  | string     | null: false                    |
-| seller               | string     | null: false                    |
+| Column                 | Type       | Options                        |
+| ------------------     | ---------- | ------------------------------ |
+| image                  | string     | null: false                    |
+| explanation            | text       | null: false                    |
+| detail_category_id     | integer    | null: false                    |
+| detail_condition_id    | integer    | null: false                    |
+| delivery_chages_id     | integer    | null: false                    |
+| delivery_area_id       | integer    | null: false                    |
+| delivery_day_id        | integer    | null: false                    |
+| price                  | integer    | null: false                    |
+| profit                 | string     | null: false                    |
 
-- has_many :records
-- has_many :images
-- has_many :categories
+- has_many :orders
 - belongs_to :user
 
-##  Records テーブル
+##  orders テーブル
 
 | Column               | Type       | Options                        |
 | ------               | ---------- | ------------------------------ |
-| item_name            | string     | null: false                    |
-| user_id              | references | null: false, foreign_key: true |
-| price                | string     | null: false                    |
-| date                 | string     | null: false                    |
-| category             | string     | null: false                    |
-| shipping_chage       | string     | null: false                    |
-| prefecture           | string     | null: false                    |
-| shipping_date        | string     | null: false                    |
+| item                 | references | null: false, foreign_key: true |
+| user                 | references | null: false, foreign_key: true |
 
-- has_many :adresses
 - belongs_to :user
 - belongs_to :item
 - has_one  :address
 
-##  Adresses テーブル
+##  Addresses テーブル
 
 | Column               | Type       | Options                        |
 | ------               | ---------- | ------------------------------ |
@@ -65,35 +57,6 @@
 | adress1              | string     | null: false                    |
 | adress2              | string     | null: false                    |
 | number               | string     | null: false                    |
-| user_id              | references | null: false, foreign_key: true |
+| user                 | references | null: false, foreign_key: true |
 
-- has_many :users
-- has_many :items
-- belongs_to :item
-
-##  cards テーブル
-
-| Column               | Type       | Options                        |
-| ------               | ---------- | ------------------------------ |
-| user_id              | references | null: false, foreign_key: true |
-| customer_id          | string     | null: false,                   |
-| card_id              | string     | null: false,                   |
-
-- belongs_to :user
-
-##  images テーブル
-
-| Column               | Type       | Options                        |
-| ------               | ---------- | ------------------------------ |
-| image                | string     | null: false,                   |
-| item_id              | integer    | null: false, foreign_key: true |
-
-- belongs_to :item
-
-##  categories  テーブル
-
-| Column               | Type       | Options                        |
-| ------               | ---------- | ------------------------------ |
-| name                 | string     | null: false,                   |
-
-- belongs_to :item
+- belongs_to :order
