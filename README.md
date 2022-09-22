@@ -20,17 +20,17 @@
 
 | Column                 | Type       | Options                        |
 | ------------------     | ---------- | ------------------------------ |
-| image                  | string     | null: false                    |
+| item                   | string     | null: false                    |
 | explanation            | text       | null: false                    |
 | detail_category_id     | integer    | null: false                    |
 | detail_condition_id    | integer    | null: false                    |
-| delivery_chages_id     | integer    | null: false                    |
-| delivery_area_id       | integer    | null: false                    |
+| delivery_burden_id     | integer    | null: false                    |
+| prefecture_id          | integer    | null: false                    |
 | delivery_day_id        | integer    | null: false                    |
 | price                  | integer    | null: false                    |
-| profit                 | string     | null: false                    |
+| comment                | text       | null: false                    |
 
-- has_many :orders
+- has_one :orders
 - belongs_to :user
 
 ##  orders テーブル
@@ -48,14 +48,10 @@
 
 | Column               | Type       | Options                        |
 | ------               | ---------- | ------------------------------ |
-| family_name          | string     | null: false                    |
-| first_name           | references | null: false, foreign_key: true |
-| family_name_kana     | string     | null: false                    |
-| first_name_kana      | string     | null: false                    |
-| prefecture           | string     | null: false                    |
+| prefecture_id        | integer    | null: false                    |
 | city                 | string     | null: false                    |
 | adress1              | string     | null: false                    |
-| adress2              | string     | null: false                    |
+| adress2              | string     |                                |
 | number               | string     | null: false                    |
 | user                 | references | null: false, foreign_key: true |
 
