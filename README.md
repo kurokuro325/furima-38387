@@ -48,12 +48,12 @@
 
 | Column               | Type       | Options                        |
 | ------               | ---------- | ------------------------------ |
-| post_code            | integer    | null: false                    |
+| post_code            | string     | null: false                    |
 | prefecture_id        | integer    | null: false                    |
 | city                 | string     | null: false                    |
 | address1             | string     | null: false                    |
 | address2             | string     |                                |
-| number               | integer    | null: false                    |
+| number               | string     | null: false                    |
 | order                | references | null: false, foreign_key: true |
 
 - belongs_to :order
