@@ -5,7 +5,7 @@
 | Column             | Type   | Options                        |
 | ------------------ | ------ | -------------------------------|
 | nickname           | string | null: false                    |
-| email              | string | null: false, unique: true,     |
+| email              | string | null: false, unique: true      |
 | encrypted_password | string | null: false                    |
 | family_name        | string | null: false                    |
 | first_name         | string | null: false                    |
@@ -28,9 +28,9 @@
 | prefecture_id          | integer    | null: false                    |
 | delivery_day_id        | integer    | null: false                    |
 | price                  | integer    | null: false                    |
-| comment                | text       | null: false                    |
+| user                   | references | null: false, foreign_key: true |
 
-- has_one :orders
+- has_one :order
 - belongs_to :user
 
 ##  orders テーブル
@@ -48,11 +48,12 @@
 
 | Column               | Type       | Options                        |
 | ------               | ---------- | ------------------------------ |
+| post_code            | integer    | null: false                    |
 | prefecture_id        | integer    | null: false                    |
 | city                 | string     | null: false                    |
-| adress1              | string     | null: false                    |
-| adress2              | string     |                                |
-| number               | string     | null: false                    |
-| user                 | references | null: false, foreign_key: true |
+| address1             | string     | null: false                    |
+| address2             | string     |                                |
+| number               | integer    | null: false                    |
+| order                | references | null: false, foreign_key: true |
 
 - belongs_to :order
