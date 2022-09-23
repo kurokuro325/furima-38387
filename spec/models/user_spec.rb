@@ -5,7 +5,15 @@ RSpec.describe User, type: :model do
     it "nicknameが空だと登録できない" do
       user = User.new(nickname: "", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000")
       user.valid?
-      binding.pry
+      expect(user.errors.full_messages).to include("Nickname can't be blank")
     end
+    it "emailが空だと登録できない" do
+      user = User.new(nickname: "abe", email: "", password: "00000000", password_confirmation: "00000000")
+      user.valid?
+      expect(user.errors.full_messages).to include("Email can't be blank")
+    end
+    it "重複したemailが存在する場合登録できないこと" do
+
+
   end
 end
