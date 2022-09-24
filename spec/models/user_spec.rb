@@ -6,7 +6,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "ユーザー新規登録" do
-    context '登録ができない時' do
     it "nicknameが空だと登録できない" do
       @user.nickname = '' 
       @user.valid?
@@ -57,6 +56,50 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
+    it "名前が空だと登録できない" do
+      @user.first_name = '' 
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name can't be blank")
+    end
+    it "名字が空だと登録できない" do
+      @user.family_name = '' 
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name can't be blank")
+    end
+    it "名前が全角入力（漢字・ひらがな・カタカナ）でないと登録できない" do
+      @user.first_name = '/ \A (?: \p {ひらがな}| \p {カタカナ}|[ー－]|[一-龠々])+ \z /'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+    end
+    it "名字が全角入力（漢字・ひらがな・カタカナ）でないと登録できない" do
+      @user.family_name = '/ \A (?: \p {ひらがな}| \p {カタカナ}|[ー－]|[一-龠々])+ \z /'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name is invalid")
+    end
+    it "名前(カナ)が空だと登録できない" do
+      @user.first_name_kana = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana can't be blank")
+    end
+    it "名字(カナ)が空だと登録できない" do
+      @user.family_name_kana = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name kana can't be blank")
+    end
+    it "名前(カナ)が全角（カタカナ）でないと登録できない" do
+      @user.first_name_kana = '/ \A [ァガー－]+ \z /'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+    end
+    it "名字(カナ)が全角（カタカナ）でないと登録できない" do
+      @user.family_name_kana = '/ \A [ァガー－]+ \z /'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name is invalid")
+    end
+    it "名前(カナ)が空だと登録できない" do
+      @user.birthday = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birthday can't be blank")
+    end
   end
-end
 end
