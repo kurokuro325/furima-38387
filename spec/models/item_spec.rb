@@ -61,6 +61,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
+      it 'priceが半角数値でないと登録できないこと' do
+        @item.price = '/\A[0-9]+\z/'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
       it 'detail_category_idが1だと登録できないこと' do
         @item.detail_category_id = 1
         @item.valid?
@@ -85,6 +90,11 @@ RSpec.describe Item, type: :model do
         @item.delivery_day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery day can't be blank")
+      end
+      it 'user_idがないと登録できないこと' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end

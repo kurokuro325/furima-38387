@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_burden
   belongs_to :prefecture
   belongs_to :delivery_day
+  belongs_to :user
 
   validates :image, presence: true
   validates :item, presence: true
@@ -16,8 +17,7 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :delivery_day_id, presence: true
   validates :price, presence: true,
-                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }, format: { with: /\A[0-9]+\z/ }
-
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range', only_integer: true}, format: { with: /\A[0-9]+\z/ }
   validates :detail_category_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :detail_condition_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :delivery_burden_id, numericality: { other_than: 1, message: "can't be blank" }
