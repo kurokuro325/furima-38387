@@ -3,7 +3,7 @@ RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
   end
-  
+
   describe '商品出品ページの登録' do
     context '商品出品ができるとき' do
       it '必須項目が全てあれば出品できること' do
@@ -51,41 +51,41 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it "priceが299以下だと登録できないこと" do
+      it 'priceが299以下だと登録できないこと' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
-      it "priceが10000000だと登録できないこと" do
-        @item.price = "10000000"
+      it 'priceが10000000だと登録できないこと' do
+        @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
-      it "detail_category_idが1だと登録できないこと" do
+      it 'detail_category_idが1だと登録できないこと' do
         @item.detail_category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Detail category can't be blank")
       end
-      it "detail_category_idが1だと登録できないこと" do
+      it 'detail_category_idが1だと登録できないこと' do
         @item.detail_condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Detail condition can't be blank")
       end
-      it "delivery_burden_idが1だと登録できないこと" do
+      it 'delivery_burden_idが1だと登録できないこと' do
         @item.delivery_burden_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery burden can't be blank")
       end
-      it "prefecture_idが1だと登録できないこと" do
+      it 'prefecture_idが1だと登録できないこと' do
         @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it "delivery_day_idが1だと登録できないこと" do
+      it 'delivery_day_idが1だと登録できないこと' do
         @item.delivery_day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery day can't be blank")
       end
-   end
+    end
   end
 end
