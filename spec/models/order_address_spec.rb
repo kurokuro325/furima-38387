@@ -37,7 +37,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Post code can't be blank")
       end
       it 'post_codeが「3桁ハイフン4桁」の半角文字列出ないと購入出来ない' do
-        @order_address.post_code = '/\A[0-9]{3}-[0-9]{4}\z/'
+        @order_address.post_code = '0001111'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
