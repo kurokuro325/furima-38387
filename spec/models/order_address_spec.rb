@@ -8,52 +8,52 @@ RSpec.describe OrderAddress, type: :model do
     sleep 0.1
   end
 
-  describe '商品購入ページの登録' do
-    context '商品購入項目の保存ができるとき' do
-      it '全ての項目が記入されていれば保存ができること' do
+  describe '商品の購入' do
+    context '商品の購入ができるとき' do
+      it '全ての項目が記入されていれば購入ができること' do
         expect(@order_address).to be_valid
       end
-      it 'tokenがあれば保存ができること' do
+      it 'tokenがあれば購入ができること' do
         expect(@order_address).to be_valid
       end
     end
-    context '商品購入項目の保存ができないとき' do
-      it 'item_idが空だと保存出来ない' do
+    context '商品購入ができないとき' do
+      it 'item_idが空だと購入出来ない' do
         @order_address.item_id = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
-      it 'user_idが空だと保存出来ない' do
+      it 'user_idが空だと購入出来ない' do
         @order_address.user_id = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("User can't be blank")
       end
-      it 'post_codeが空だと保存出来ない' do
+      it 'post_codeが空だと購入出来ない' do
         @order_address.post_code = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Post code can't be blank")
       end
-      it 'post_codeが「3桁ハイフン4桁」の半角文字列出ないと保存出来ない' do
+      it 'post_codeが「3桁ハイフン4桁」の半角文字列出ないと購入出来ない' do
         @order_address.post_code = '/\A[0-9]{3}-[0-9]{4}\z/'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
-      it 'prefecture_idが空だと保存出来ない' do
+      it 'prefecture_idが空だと購入出来ない' do
         @order_address.prefecture_id = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'cityが空だと保存出来ない' do
+      it 'cityが空だと購入出来ない' do
         @order_address.city = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("City can't be blank")
       end
-      it 'address1が空だと保存出来ない' do
+      it 'address1が空だと購入出来ない' do
         @order_address.address1 = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Address1 can't be blank")
       end
-      it 'numberが空だと保存出来ない' do
+      it 'numberが空だと購入出来ない' do
         @order_address.number = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Number can't be blank")
@@ -73,7 +73,7 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Number is invalid')
       end
-      it 'tokenが空では登録できないこと' do
+      it 'tokenが空では購入できないこと' do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
