@@ -69,7 +69,7 @@ RSpec.describe OrderAddress, type: :model do
       it '電話番号が12桁以上では購入できない' do
         @order_address.number = '090123456786'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Number is invalid")
+        expect(@order_address.errors.full_messages).to include('Number is invalid')
       end
       it '電話番号に半角数字以外が含まれている場合は購入できない' do
         @order_address.number = '090123456８い'
