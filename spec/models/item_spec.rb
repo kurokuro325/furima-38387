@@ -39,7 +39,6 @@ RSpec.describe Item, type: :model do
       it 'prefecture_idが空だと出品出来ない' do
         @item.prefecture_id = '1'
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'delivery_day_idが空だと出品出来ない' do
