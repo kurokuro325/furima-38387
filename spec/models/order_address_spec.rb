@@ -39,7 +39,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
       it 'prefecture_idが空だと購入出来ない' do
-        @order_address.prefecture_id = ''
+        @order_address.prefecture_id = '1'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -59,19 +59,20 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Number can't be blank")
       end
       it '電話番号が9桁以下では購入できない' do
-        @order_address.number = '/\A\d{10,11}\z/'
+        @order_address.number = '090123456'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Number is invalid')
+        expect(@order_address.errors.full_messages).to include("Number is invalid")
       end
       it '電話番号が12桁以上では購入できない' do
-        @order_address.number = '/\A\d{10,11}\z/'
+        @order_address.number = '090123456'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Number is invalid')
+        expect(@order_address.errors.full_messages).to include("Number is invalid")
       end
       it '電話番号に半角数字以外が含まれている場合は購入できない' do
-        @order_address.number = '/\A\d{10,11}\z/'
+        @order_address.number = '090123456'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Number is invalid')
+        binding.pry
+        expect(@order_address.errors.full_messages).to include("Number is invalid")
       end
       it 'tokenが空では購入できないこと' do
         @order_address.token = nil
