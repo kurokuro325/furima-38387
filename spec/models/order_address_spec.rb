@@ -71,7 +71,6 @@ RSpec.describe OrderAddress, type: :model do
       it '電話番号に半角数字以外が含まれている場合は購入できない' do
         @order_address.number = '090123456'
         @order_address.valid?
-        binding.pry
         expect(@order_address.errors.full_messages).to include('Number is invalid')
       end
       it 'tokenが空では購入できないこと' do
